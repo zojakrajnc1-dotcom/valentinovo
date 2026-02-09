@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentinovo 💘</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@500&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(#9ad9ff, #ffffff);
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Drevo */
+#tree {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 450px;
+}
+
+#trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 220px;
+  background: #6b3e26;
+  border-radius: 20px;
+}
+
+#crown {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 260px;
+}
+
+/* Srčki – listi */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 18px;
+  opacity: 0;
+  animation: pop 0.8s forwards;
+}
+
+@keyframes pop {
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Vprašanje */
+#question {
+  position: absolute;
+  top: 7%;
+  width: 100%;
+  text-align: center;
+}
+
+#question h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  color: #d6336c;
+}
+
+button {
+  font-size: 20px;
+  padding: 12px 28px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #adb5bd;
+}
+
+/* JEEEJ ekran */
+#love {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
+#love h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 64px;
+  color: #ff1e56;
+  animation: lovePop 1s infinite alternate;
+}
+
+@keyframes lovePop {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="tree">
+  <div id="trunk"></div>
+  <div id="crown"></div>
+</div>
+
+<div id="question">
+  <h1>Bi bila moj Valentin? 💘</h1>
+  <button id="yes">DA</button>
+  <button id="no">NE</button>
+</div>
+
+<div id="love">
+  <h1>JEEEJ, LJUBIM TE ❤️</h1>
+</div>
+
+<script>
+/* Krošnja iz srčkov */
+const crown = document.getElementById("crown");
+
+for (let i = 0; i < 80; i++) {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+
+  const angle = Math.random() * Math.PI * 2;
+  const radius = Math.random() * 120;
+
+  heart.style.left = 130 + Math.cos(angle) * radius + "px";
+  heart.style.top  = 130 + Math.sin(angle) * radius + "px";
+  heart.style.animationDelay = Math.random() * 1.5 + "s";
+
+  crown.appendChild(heart);
+}
+
+/* NE poveča DA */
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+let scale = 1;
+
+no.addEventListener("click", () => {
+  scale += 0.25;
+  yes.style.transform = `scale(${scale})`;
+});
+
+/* DA → JEEEJ */
+yes.addEventListener("click", () => {
+  document.getElementById("question").style.display = "none";
+  document.getElementById("love").style.display = "block";
+});
+</script>
+
+</body>
+</html>
